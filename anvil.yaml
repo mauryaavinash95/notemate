@@ -1,5 +1,6 @@
 allow_embedding: false
 package_name: Test_Brickhack_v1
+startup: null
 name: Test-Brickhack-v1
 startup_form: Form1
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
