@@ -1,11 +1,11 @@
-from ._anvil_designer import Form2Template
+from ._anvil_designer import AV_Upload_And_ProcessTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class Form2(Form2Template):
+class AV_Upload_And_Process(AV_Upload_And_ProcessTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -16,4 +16,14 @@ class Form2(Form2Template):
     """This method is called when the button is clicked"""
     
     pass
+
+  def file_loader_2_change(self, file, **event_args):
+    """This method is called when a new file is loaded into this FileLoader"""
+    pass
+
+  def file_loader_1_change(self, file, **event_args):
+    """This method is called when a new file is loaded into this FileLoader"""
+    pass
+
+
 
