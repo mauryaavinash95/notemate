@@ -23,7 +23,14 @@ class AV_Upload_And_Process(AV_Upload_And_ProcessTemplate):
 
   def file_loader_1_change(self, file, **event_args):
     """This method is called when a new file is loaded into this FileLoader"""
-    pass
+    res = anvil.server.call('get_audio_file', file=file)
+    print("Response is", res)
+    n = Notification(f"Upload successful for file: {file.name}, of size (B): {file.length}", timeout=5)
+    n.show()
+#     print(f"The file's name is: {file.name}")
+#     print(f"The number of bytes in the file is: {file.length}")
+#     print(f"The file's content type is: {file.content_type}")
+    
 
 
 
