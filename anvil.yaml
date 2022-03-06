@@ -2,12 +2,12 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: View_all_notes_card}
+startup: {type: form, module: Main}
 package_name: Test_Brickhack_v1
 allow_embedding: false
 name: Test-Brickhack-v1
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
-startup_form: null
+metadata: {}
 db_schema:
   notes:
     title: Notes

@@ -38,6 +38,10 @@ components:
   name: button_1
   layout_properties: {grid_position: 'DFJQXR,WQYGKY'}
   event_bindings: {click: button_1_click}
+- type: Spacer
+  properties: {height: 32}
+  name: spacer_1
+  layout_properties: {grid_position: 'IGESMM,RFNIPO'}
 - type: FileLoader
   properties:
     role: null
@@ -50,7 +54,7 @@ components:
     files: []
     foreground: ''
     visible: true
-    text: Click notes or Screenshot
+    text: Capture notes or Screenshot
     font_size: null
     font: ''
     spacing_above: small
