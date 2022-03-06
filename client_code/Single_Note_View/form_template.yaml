@@ -7,6 +7,13 @@ components:
   name: column_panel_1
   layout_properties: {grid_position: 'SJITJT,AZSXQC'}
   components:
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Single note, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: label_1
+    layout_properties: {grid_position: 'AVXMYQ,LECHFU'}
   - type: Image
     properties: {height: 151}
     name: image_1
@@ -24,11 +31,15 @@ components:
     name: link_3
     layout_properties: {grid_position: 'XULTUB,OFYPUG EGFQCS,RPFPIT'}
   - type: RichText
-    properties: {}
+    properties: {role: null, align: left, tooltip: '', enable_slots: true, border: '',
+      foreground: '', visible: true, font_size: null, content: Text-1, font: '', spacing_above: small,
+      spacing_below: small, data: null, background: '', format: markdown}
     name: rich_text_1
     layout_properties: {grid_position: 'XULTUB,GBDZMO KMXHES,MMWAVG'}
   - type: RichText
-    properties: {}
+    properties: {role: null, align: left, tooltip: '', enable_slots: true, border: '',
+      foreground: '', visible: true, font_size: null, content: Text-2, font: '', spacing_above: small,
+      spacing_below: small, data: null, background: '', format: markdown}
     name: rich_text_2
     layout_properties: {grid_position: 'XULTUB,GBDZMO DTVPBM,GGIEYN'}
   - type: RichText

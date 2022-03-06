@@ -1,11 +1,11 @@
-from ._anvil_designer import View_notes_cardTemplate
+from ._anvil_designer import Single_Note_ViewTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class View_notes_card(View_notes_cardTemplate):
+class Single_Note_View(Single_Note_ViewTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
