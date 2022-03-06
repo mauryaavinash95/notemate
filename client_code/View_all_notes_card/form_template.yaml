@@ -9,9 +9,8 @@ components:
   name: rich_text_1
   layout_properties: {grid_position: 'LUTTYO,AJPWIZ'}
 - type: RepeatingPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', items: null, visible: true,
-    spacing_above: small, spacing_below: small, item_template: Single_Note_View, background: ''}
+  properties: {item_template: View_all_notes_card.ItemTemplate2}
   name: repeating_panel_1
-  layout_properties: {grid_position: 'PHDNIN,BCVJVC'}
+  layout_properties: {grid_position: 'EBLCJH,KSVYDS'}
 is_package: true
 custom_component: true

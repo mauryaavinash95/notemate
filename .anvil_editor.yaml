@@ -5,6 +5,7 @@ unique_ids:
     Card_Template: '1646527909631292821345133.9483'
     Single_Note_View: '1646516068232566908536565.9688'
     View_all_notes_card: '1646526263005648930739420.1422'
+    View_all_notes_card.ItemTemplate2: '164653724825113537373000.815256'
   modules: {}
   server_modules:
     AV_Server_Test: '1646514294220254940231657.74893'

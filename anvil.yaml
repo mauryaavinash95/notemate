@@ -44,4 +44,15 @@ db_schema:
     - name: Image1
       admin_ui: {width: 200}
       type: media
+  test:
+    title: Test
+    client: none
+    server: full
+    columns:
+    - name: Name
+      admin_ui: {width: 200}
+      type: string
+    - name: ID
+      admin_ui: {width: 200}
+      type: string
 renamed: true
