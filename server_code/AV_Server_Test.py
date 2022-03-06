@@ -20,3 +20,24 @@ def send_audio_file(file):
   }
   return res
 
+@anvil.server.http_endpoint("/transcript/:id")
+def insert_transcript():
+  ip = anvil.server.request.remote_address
+  data = anvil.server.request.body
+  return {
+    "status": "Okie-dokey",
+    "your_ip": ip,
+    "your_data": data
+  }
+
+@anvil.server.http_endpoint("/summary/:id")
+def insert_summary():
+  ip = anvil.server.request.remote_address
+  data = anvil.server.request.body
+  return {
+    "status": "Okie-dokey",
+    "your_ip": ip,
+    "your_data": data
+  }
+
+
