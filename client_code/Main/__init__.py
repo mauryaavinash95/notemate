@@ -15,6 +15,8 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+   
+  def f
     self.content_panel.clear()
     self.content_panel.add_component(Landing(), full_width_row=True)
     
