@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
+  event_bindings: {show: form_show}
 components:
 - type: TextBox
   properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Lecture Topic,

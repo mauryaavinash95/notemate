@@ -3,18 +3,24 @@ container:
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: "<!-- <style>\n    html, body {\n        margin: 0!important;\n\
       \        padding: 0!important;\n    }\n</style> -->\n<link rel=\"stylesheet\"\
-      \ href=\"_/theme/theme.css\">\n<!-- <meta name=\"viewport\" content=\"width=device-width,\
-      \ initial-scale=1.0, minimum-scale=1.0\"> -->\n<center>\n<br>\n<button class=\"\
-      btn btn-default to-disable\" id=\"btn-start-recording\">Start Recording</button>\n\
-      <button class=\"btn btn-default to-disable\"id=\"btn-stop-recording\" disabled>Stop\
+      \ href=\"_/theme/theme.css\">\n<!-- <script src=\"_/theme/helper.js\"></script>\
+      \ -->\n<!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,\
+      \ minimum-scale=1.0\"> -->\n<center>\n<br>\n<button class=\"btn btn-default\
+      \ to-disable\" id=\"btn-start-recording\">Start Recording</button>\n<button\
+      \ class=\"btn btn-default to-disable\"id=\"btn-stop-recording\" disabled>Stop\
       \ Recording</button>\n<button class=\"btn btn-default to-disable\" id=\"btn-release-microphone\"\
       \ disabled>Release Microphone</button>\n<button class=\"btn btn-default to-disable\"\
       \ id=\"btn-download-recording\" disabled>Download</button>\n\n<hr>\n<div><audio\
       \ controls autoplay playsinline></audio></div>\n</center>\n\n<script src=\"\
       https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js\"></script>\n\
-      <script>\nvar audio = document.querySelector('audio');\n\n// // ANVIL HOOK MODIFICATION\
-      \ START\n// var calling_form = null;\n  \n// function InitLibary() {\n//   calling_form\
-      \ = this; // take note of calling form (component's form)\n// }\n// // MODIFICATION\
+      <script>\nvar audio = document.querySelector('audio');\nvar lec_topic, lec_name,\
+      \ key;  \n  \n// ANVIL HOOK MODIFICATION START\nvar calling_form = null;\n \
+      \ \nfunction InitLibary() {\n  calling_form = this; // take note of calling\
+      \ form (component's form)\n}\n// MODIFICATION END\n\nfunction update_lec(lt,\
+      \ ln, k) {\n  lec_topic = lt;\n  lec_name = ln;\n  key = k;\n  console.log(\"\
+      In update_lec\", lec_topic, lec_name);\n}\n\n// // ANVIL HOOK MODIFICATION START\n\
+      // var calling_form = null;\n// function InitLibary() {\n//   calling_form =\
+      \ this; // take note of calling form (component's form)\n// }\n// // MODIFICATION\
       \ END\n  \nfunction captureMicrophone(callback) {\n    btnReleaseMicrophone.disabled\
       \ = false;\n\n    if(microphone) {\n        callback(microphone);\n        return;\n\
       \    }\n\n    if(typeof navigator.mediaDevices === 'undefined' || !navigator.mediaDevices.getUserMedia)\
@@ -29,26 +35,23 @@ container:
       \ = true;\n    newAudio.autoplay = true;\n\n    if(src) {\n        newAudio.src\
       \ = src;\n    }\n    \n    var parentNode = audio.parentNode;\n    parentNode.innerHTML\
       \ = '';\n    parentNode.appendChild(newAudio);\n\n    audio = newAudio;\n}\n\
-      \n// // NOTIFY ANVIL MODIFICATION START  \n// function notifyAnvil(reader, mediatype)\
-      \ {\n//   \tdebugger;\n//     let base64String = \"\";\n//     base64String\
-      \ = reader.result;\n//     let tsstrng = reader.result;\n//     console.log('Base64\
-      \ String - ', base64String); \n//     base64_audio_string = base64String.substr(base64String.indexOf(',')\
-      \ + 1);  \n//   \tanvil.call(calling_form, 'onStop', base64_audio_string, mediatype);\n\
-      // }\n// // MODIFICATION END\n  \nfunction stopRecordingCallback() {\n    replaceAudio(URL.createObjectURL(recorder.getBlob()));\n\
-      \n// // CONVERT BASE64 MODIFICATION START\n//   \tdebugger;\n//   \taudio_blob=recorder.getBlob();\
-      \  \n//     var reader = new FileReader(); \n//     reader.readAsDataURL(audio_blob);\
-      \ \n//     reader.onloadend = notifyAnvil(reader, audio_blob.type)\n// // MODIFICATION\
-      \ END\n\n    btnStartRecording.disabled = false;\n\n    setTimeout(function()\
-      \ {\n        if(!audio.paused) return;\n\n        setTimeout(function() {\n\
-      \            if(!audio.paused) return;\n            audio.play();\n        },\
-      \ 1000);\n        \n        audio.play();\n    }, 300);\n\n    audio.play();\n\
-      \n    btnDownloadRecording.disabled = false;\n\n    if(isSafari) {\n       \
-      \ click(btnReleaseMicrophone);\n    }\n}\n\nvar isEdge = navigator.userAgent.indexOf('Edge')\
-      \ !== -1 && (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob);\nvar isSafari\
-      \ = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);\n\nvar recorder;\
-      \ // globally accessible\nvar microphone;\n\nvar btnStartRecording = document.getElementById('btn-start-recording');\n\
-      var btnStopRecording = document.getElementById('btn-stop-recording');\nvar btnReleaseMicrophone\
-      \ = document.querySelector('#btn-release-microphone');\nvar btnDownloadRecording\
+      \  \nfunction stopRecordingCallback() {\n    replaceAudio(URL.createObjectURL(recorder.getBlob()));\n\
+      \  \n  \n  // CONVERT BASE64 MODIFICATION START\n  \taudio_blob=recorder.getBlob();\
+      \  \n    var reader = new FileReader(); \n  \treader.onload = function(e) {\n\
+      \      let base64String = reader.result; \n      base64_audio_string = base64String.substr(base64String.indexOf(',')\
+      \ + 1);  \n      anvil.call(calling_form, 'onStop', base64_audio_string, audio_blob.type);\
+      \      \n    };\n    reader.readAsDataURL(audio_blob);\n// MODIFICATION END\n\
+      \    btnStartRecording.disabled = false;\n\n    setTimeout(function() {\n  \
+      \      if(!audio.paused) return;\n\n        setTimeout(function() {\n      \
+      \      if(!audio.paused) return;\n            audio.play();\n        }, 1000);\n\
+      \        \n        audio.play();\n    }, 300);\n\n    audio.play();\n\n    btnDownloadRecording.disabled\
+      \ = false;\n\n    if(isSafari) {\n        click(btnReleaseMicrophone);\n   \
+      \ }\n}\n\nvar isEdge = navigator.userAgent.indexOf('Edge') !== -1 && (!!navigator.msSaveOrOpenBlob\
+      \ || !!navigator.msSaveBlob);\nvar isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);\n\
+      \nvar recorder; // globally accessible\nvar microphone;\n\nvar btnStartRecording\
+      \ = document.getElementById('btn-start-recording');\nvar btnStopRecording =\
+      \ document.getElementById('btn-stop-recording');\nvar btnReleaseMicrophone =\
+      \ document.querySelector('#btn-release-microphone');\nvar btnDownloadRecording\
       \ = document.getElementById('btn-download-recording');\n\nbtnStartRecording.onclick\
       \ = function() {\n    this.disabled = true;\n    this.style.border = '';\n \
       \   this.style.fontSize = '';\n\n    if (!microphone) {\n        captureMicrophone(function(mic)\
@@ -72,10 +75,21 @@ container:
       \ = null;\n    }\n\n    recorder = RecordRTC(microphone, options);\n\n    recorder.startRecording();\n\
       \n    btnStopRecording.disabled = false;\n    btnDownloadRecording.disabled\
       \ = true;\n};\n\nbtnStopRecording.onclick = function() {\n    this.disabled\
-      \ = true;\n    recorder.stopRecording(stopRecordingCallback);\n};\n\nbtnReleaseMicrophone.onclick\
-      \ = function() {\n    this.disabled = true;\n    btnStartRecording.disabled\
-      \ = false;\n\n    if(microphone) {\n        microphone.stop();\n        microphone\
-      \ = null;\n    }\n\n    if(recorder) {\n        // click(btnStopRecording);\n\
+      \ = true;\n    recorder.stopRecording(stopRecordingCallback);\n    // My code\n\
+      \  if(isSafari) {\n        recorder.getDataURL(function(dataURL) {\n       \
+      \     SaveToDisk(dataURL, getFileName('mp3'));\n        });\n        return;\n\
+      \    }\n\n    var blob = recorder.getBlob();\n    var file = new File([blob],\
+      \ getFileName('mp3'), {\n        type: 'audio/mp3'\n    });\n    var filename\
+      \ = lec_topic+\"_\"+lec_name+\".mp3\"\n    var url = \"https://storage.googleapis.com/upload/storage/v1/b/make3400_audiofiles/o?uploadType=media&name=\"\
+      +filename;\n\n    var xhr = new XMLHttpRequest();\n    xhr.open(\"POST\", url);\n\
+      \    \n    xhr.setRequestHeader(\"Authorization\", \"Bearer \"+key);\n    xhr.setRequestHeader(\"\
+      Content-Type\", \"audio/mpeg\");\n    \n    xhr.onreadystatechange = function\
+      \ () {\n      if (xhr.readyState === 4) {\n          console.log(xhr.status);\n\
+      \          console.log(xhr.responseText);\n      }};    \n    xhr.send(file);\n\
+      \    \n    alert(\"Upload successful for file: \"+filename);\n    // My code\n\
+      };\n\nbtnReleaseMicrophone.onclick = function() {\n    this.disabled = true;\n\
+      \    btnStartRecording.disabled = false;\n\n    if(microphone) {\n        microphone.stop();\n\
+      \        microphone = null;\n    }\n\n    if(recorder) {\n        // click(btnStopRecording);\n\
       \    }\n};\n\nbtnDownloadRecording.onclick = function() {\n    this.disabled\
       \ = true;\n    if(!recorder || !recorder.getBlob()) return;\n\n    if(isSafari)\
       \ {\n        recorder.getDataURL(function(dataURL) {\n            SaveToDisk(dataURL,\
@@ -108,6 +122,8 @@ container:
       \        _window.document.execCommand('SaveAs', true, fileName || fileURL)\n\
       \        _window.close();\n    }\n}\n</script>\n\n<footer style=\"margin-top:\
       \ 20px;\"><small id=\"send-message\"></small></footer>\n"}
+  data_bindings: []
+  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
 components: []
 is_package: true
 custom_component: true
