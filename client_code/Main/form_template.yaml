@@ -37,6 +37,7 @@ components:
       background: '', bold: false, underline: false, icon: 'fa:sign-out'}
     name: button_1
     layout_properties: {}
+    event_bindings: {click: button_1_click}
 - type: RichText
   properties: {role: null, align: left, tooltip: '', enable_slots: true, border: '',
     foreground: '', visible: true, font_size: null, content: Smarty Notes, font: '',
