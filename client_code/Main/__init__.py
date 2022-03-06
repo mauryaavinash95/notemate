@@ -21,10 +21,24 @@ class Main(MainTemplate):
     self.content_panel.add_component(Landing(), full_width_row=True)
     if anvil.users.get_user() is None:
       self.button_1.visible = False;
-      self.button_1.visible = False;
-      self.button_1.visible = False;
-    else
+      self.button_2.visible = False;
+      self.button_3.visible = False;
+      self.button_4.visible = True;
+    else:
+      self.button_1.visible = True;
+      self.button_2.visible = True;
+      self.button_3.visible = True;
+      self.button_4.visible = False;
     
+  
+  def button_4_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    if anvil.users.get_user() is None:
+      try:
+        user = anvil.users.login_with_google()
+      except anvil.users.AuthenticationFailed as e:
+        alert("Your username/password is wrong. Please retry!")
+  
   def button_2_click(self, **event_args):
     self.content_panel.clear()
     self.content_panel.add_component(Upload_And_Process(), full_width_row=True)
@@ -38,9 +52,9 @@ class Main(MainTemplate):
     self.content_panel.add_component(All_topics(), full_width_row=True)
 
   def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
     anvil.users.logout()
     open_form()
+
 
 
 

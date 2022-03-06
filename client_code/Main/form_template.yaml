@@ -2,7 +2,7 @@ is_package: true
 container:
   type: HtmlTemplate
   properties: {html: '@theme:standard-page.html'}
-  event_bindings: {show: form_show}
+  event_bindings: {show: form_show, refreshing_data_bindings: form_s}
 components:
 - type: ColumnPanel
   properties: {}
@@ -15,6 +15,14 @@ components:
   layout_properties: {slot: nav-right}
   data_bindings: []
   components:
+  - type: Button
+    properties: {role: primary-color, align: center, tooltip: Login, border: '', enabled: true,
+      foreground: '', visible: true, text: '', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:sign-in'}
+    name: button_4
+    layout_properties: {}
+    event_bindings: {click: button_4_click}
   - type: Button
     properties: {role: primary-color, align: center, tooltip: Home, border: '', enabled: true,
       foreground: '', visible: true, text: '', font_size: null, font: '', spacing_above: small,
