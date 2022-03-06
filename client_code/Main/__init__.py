@@ -29,6 +29,7 @@ class Main(MainTemplate):
       self.button_2.visible = True;
       self.button_3.visible = True;
       self.button_4.visible = False;
+      self.button_2_click()
     
   
   def button_4_click(self, **event_args):
@@ -36,6 +37,7 @@ class Main(MainTemplate):
     if anvil.users.get_user() is None:
       try:
         user = anvil.users.login_with_google()
+        self.form_show()
       except anvil.users.AuthenticationFailed as e:
         alert("Your username/password is wrong. Please retry!")
   
@@ -53,7 +55,7 @@ class Main(MainTemplate):
 
   def button_1_click(self, **event_args):
     anvil.users.logout()
-    open_form()
+    self.form_show()
 
 
 
