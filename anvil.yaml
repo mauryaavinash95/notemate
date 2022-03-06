@@ -2,7 +2,7 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: temp}
+startup: {type: form, module: View_all_notes_card}
 package_name: Test_Brickhack_v1
 allow_embedding: false
 name: Test-Brickhack-v1
@@ -42,6 +42,9 @@ db_schema:
       admin_ui: {width: 200}
       type: string
     - name: Image1
+      admin_ui: {width: 200}
+      type: media
+    - name: Audio1
       admin_ui: {width: 200}
       type: media
   test:

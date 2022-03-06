@@ -8,10 +8,4 @@ components:
   layout_properties: {grid_position: 'JBEAHO,PYOIFJ'}
   data_bindings:
   - {property: text, code: 'self.item[''Name'']'}
-- type: Label
-  properties: {}
-  name: label_2
-  layout_properties: {grid_position: 'JBEAHO,MPPGXL'}
-  data_bindings:
-  - {property: text, code: 'self.item[''ID'']'}
 is_package: true

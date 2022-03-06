@@ -10,5 +10,11 @@ class temp(tempTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 #     self.repeating_panel_1.items = [{"Name": "a", "ID": "abc"}]
-    self.repeating_panel_1.items = app_tables.test.search()
+#     self.repeating_panel_1.items = app_tables.test.search()
+
+    res = app_tables.test.search()
+    self.repeating_panel_1.items = res
     # Any code you write here will run when the form opens.
+    for row in res:
+      for element in row:
+        print(element)
