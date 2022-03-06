@@ -48,6 +48,9 @@ db_schema:
     - name: Audio1
       admin_ui: {width: 200}
       type: media
+    - name: Processed
+      admin_ui: {width: 200}
+      type: bool
   test:
     title: Test
     client: full

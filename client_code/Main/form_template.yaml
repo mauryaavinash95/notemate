@@ -15,18 +15,26 @@ components:
   data_bindings: []
   components:
   - type: Button
-    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: New Note, font_size: null, font: '', spacing_above: small,
+    properties: {role: primary-color, align: center, tooltip: Home, border: '', enabled: true,
+      foreground: '', visible: true, text: '', font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:plus'}
+      underline: false, icon: 'fa:home'}
+    name: button_3
+    layout_properties: {}
+    event_bindings: {click: button_3_click}
+  - type: Button
+    properties: {role: primary-color, align: center, tooltip: New Note, border: '',
+      enabled: true, foreground: '', visible: true, text: '', font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:plus'}
     name: button_2
     layout_properties: {}
     event_bindings: {click: button_2_click}
   - type: Button
-    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Logout, font_size: null, font: '', spacing_above: medium,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:sign-out'}
+    properties: {role: primary-color, align: center, tooltip: Sign out, border: '',
+      enabled: true, foreground: '', visible: true, text: '', font_size: null, font: '',
+      spacing_above: medium, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:sign-out'}
     name: button_1
     layout_properties: {}
 - type: RichText
@@ -35,4 +43,5 @@ components:
     spacing_above: small, spacing_below: small, data: null, background: '', format: markdown}
   name: rich_text_1
   layout_properties: {slot: title}
+  data_bindings: []
 custom_component: true

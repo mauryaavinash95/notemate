@@ -1,13 +1,9 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: false,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
 components:
-- type: RichText
-  properties: {role: null, align: left, tooltip: '', enable_slots: true, border: '',
-    foreground: '', visible: true, font_size: null, content: View All Notes, font: '',
-    spacing_above: small, spacing_below: small, data: null, background: '', format: markdown}
-  name: rich_text_1
-  layout_properties: {grid_position: 'LUTTYO,AJPWIZ'}
 - type: RepeatingPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', items: null, visible: true,
     spacing_above: small, spacing_below: small, item_template: View_all_notes_card.Single_Note_View,

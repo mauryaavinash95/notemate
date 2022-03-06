@@ -14,6 +14,6 @@ class All_topics(All_topicsTemplate):
     for x in res:
       k = x['Tag']
       unique_topics[k] = 1 if k not in unique_topics.keys() else unique_topics[k]+1
-    self.data_grid_1.items = [{"lec_name": k, "lec_count": v} for k, v in unique_topics.items()]
+    self.repeating_panel_1.items = [{"lec_name": k, "lec_count": v} for k, v in unique_topics.items()]
     
     # Any code you write here will run when the form opens.

@@ -1,7 +1,0 @@
-container:
-  type: DataRowPanel
-  data_bindings:
-  - {property: item, code: 'self.item[''lec_name'']'}
-  - {property: item, code: 'self.item[''lec_count'']'}
-components: []
-is_package: true
