@@ -1,5 +1,13 @@
-allow_embedding: false
+services:
+- source: /runtime/services/tables.yml
+  client_config: {}
+  server_config: {}
+startup: {type: form, module: AV_Upload_And_Process}
 package_name: Test_Brickhack_v1
+allow_embedding: false
+name: Test-Brickhack-v1
+runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
+startup_form: null
 db_schema:
   notes:
     title: Notes
@@ -41,11 +49,4 @@ db_schema:
     - name: Image
       admin_ui: {width: 200}
       type: media
-startup: {type: form, module: AV_Upload_And_Process}
-name: Test-Brickhack-v1
-startup_form: null
-runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
-services:
-- source: /runtime/services/tables.yml
-  client_config: {}
-  server_config: {}
+renamed: true
