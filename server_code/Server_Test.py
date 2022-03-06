@@ -1,5 +1,6 @@
 import anvil.server
 import base64
+from pydub import AudioSegment
 
 @anvil.server.callable
 def get_product(id):
@@ -10,7 +11,11 @@ def get_product(id):
 def get_blobmedia(b64str,mediatype):
     binary_content = base64.standard_b64decode(b64str)
     my_media = anvil.BlobMedia(content_type=mediatype, content=binary_content, name="audio.obj")
-    return my_media
+    song = AudioSegment.from_file(my_media,"webm")
+    res = song.export("audio.mp3", format="mp3", bitrate="320k")
+    print("Res from blob media: ", res)
+#     return my_media
+    return res
 
 @anvil.server.callable
 def send_audio_file(file, key):

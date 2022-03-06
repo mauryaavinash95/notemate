@@ -4,9 +4,9 @@ services:
   server_config: {}
 startup: {type: form, module: Main}
 package_name: Test_Brickhack_v1
-allow_embedding: false
+allow_embedding: true
 name: Test-Brickhack-v1
-runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
+runtime_options: {version: 2, client_version: '3', server_version: python3-full}
 metadata: {}
 startup_form: All_topics
 db_schema:
@@ -62,4 +62,33 @@ db_schema:
     - name: ID
       admin_ui: {width: 200}
       type: string
+  users:
+    title: Users
+    client: none
+    server: full
+    columns:
+    - name: email
+      admin_ui: {width: 200}
+      type: string
+    - name: enabled
+      admin_ui: {width: 200}
+      type: bool
+    - name: last_login
+      admin_ui: {width: 200}
+      type: datetime
+    - name: password_hash
+      admin_ui: {width: 200}
+      type: string
+    - name: n_password_failures
+      admin_ui: {width: 200}
+      type: number
+    - name: confirmed_email
+      admin_ui: {width: 200}
+      type: bool
+    - name: remembered_logins
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: signed_up
+      admin_ui: {width: 200}
+      type: datetime
 renamed: true
