@@ -1,5 +1,46 @@
 allow_embedding: false
 package_name: Test_Brickhack_v1
+db_schema:
+  notes:
+    title: Notes
+    client: none
+    server: full
+    columns:
+    - name: Name
+      admin_ui: {width: 200}
+      type: string
+    - name: Timestamp
+      admin_ui: {width: 200}
+      type: datetime
+    - name: Tag
+      admin_ui: {width: 200}
+      type: string
+    - name: Summary1
+      admin_ui: {width: 200}
+      type: string
+    - name: Summary2
+      admin_ui: {width: 200}
+      type: string
+    - name: Summary3
+      admin_ui: {width: 200}
+      type: string
+    - name: Link1
+      admin_ui: {width: 200}
+      type: string
+    - name: Link2
+      admin_ui: {width: 200}
+      type: string
+    - name: Llink2
+      admin_ui: {width: 200}
+      type: string
+  images:
+    title: Images
+    client: none
+    server: full
+    columns:
+    - name: Image
+      admin_ui: {width: 200}
+      type: media
 startup: {type: form, module: AV_Upload_And_Process}
 name: Test-Brickhack-v1
 startup_form: null
