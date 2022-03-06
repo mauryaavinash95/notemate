@@ -2,13 +2,11 @@ container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: "<!-- <style>\n    html, body {\n        margin: 0!important;\n\
-      \        padding: 0!important;\n    }\n</style> -->\n<script>\n  var getUrl\
-      \ = window.location;\n  var baseUrl = getUrl .protocol + \"//\" + getUrl.host\
-      \ + \"/_/theme/theme.css\";\n  <link rel=\"stylesheet\" href=baseUrl>\n</script>\n\
-      <!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,\
-      \ minimum-scale=1.0\"> -->\n<center>\n<br>\n<button class=\"btn btn-default\
-      \ to-disable\" id=\"btn-start-recording\">Start Recording</button>\n<button\
-      \ class=\"btn btn-default to-disable\"id=\"btn-stop-recording\" disabled>Stop\
+      \        padding: 0!important;\n    }\n</style> -->\n<link rel=\"stylesheet\"\
+      \ href=\"_/theme/theme.css\">\n<!-- <meta name=\"viewport\" content=\"width=device-width,\
+      \ initial-scale=1.0, minimum-scale=1.0\"> -->\n<center>\n<br>\n<button class=\"\
+      btn btn-default to-disable\" id=\"btn-start-recording\">Start Recording</button>\n\
+      <button class=\"btn btn-default to-disable\"id=\"btn-stop-recording\" disabled>Stop\
       \ Recording</button>\n<button class=\"btn btn-default to-disable\" id=\"btn-release-microphone\"\
       \ disabled>Release Microphone</button>\n<button class=\"btn btn-default to-disable\"\
       \ id=\"btn-download-recording\" disabled>Download</button>\n\n<hr>\n<div><audio\
