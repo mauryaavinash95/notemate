@@ -39,7 +39,8 @@ container:
       \  \n  \n  // CONVERT BASE64 MODIFICATION START\n  \taudio_blob=recorder.getBlob();\
       \  \n    var reader = new FileReader(); \n  \treader.onload = function(e) {\n\
       \      let base64String = reader.result; \n      base64_audio_string = base64String.substr(base64String.indexOf(',')\
-      \ + 1);  \n      anvil.call(calling_form, 'onStop', base64_audio_string, audio_blob.type);\
+      \ + 1);  \n      console.log('Base64 String - ', base64_audio_string); \n  \
+      \    anvil.call(calling_form, 'onStop', base64_audio_string, audio_blob.type);\
       \      \n    };\n    reader.readAsDataURL(audio_blob);\n// MODIFICATION END\n\
       \    btnStartRecording.disabled = false;\n\n    setTimeout(function() {\n  \
       \      if(!audio.paused) return;\n\n        setTimeout(function() {\n      \
