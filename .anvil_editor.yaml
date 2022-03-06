@@ -11,7 +11,7 @@ unique_ids:
     All_topics: 7QPJGH3MV5RI5VGAWIYHHU4F7TTBIERL
   modules: {}
   server_modules:
-    AV_Server_Test: '1646514294220254940231657.74893'
+    Server_Test: '1646514294220254940231657.74893'
   assets:
     standard-page.html: VE4FWOTTHRYDMO2CMCTORD2NJOVRTTSU
     theme.css: QFECF53HGYRTTKV4GAV7HERTUMNYTQJL
