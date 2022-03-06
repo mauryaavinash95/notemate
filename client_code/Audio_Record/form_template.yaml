@@ -1,18 +1,23 @@
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
-    role: null, html: "<style>\n    html, body {\n        margin: 0!important;\n \
-      \       padding: 0!important;\n    }\n</style>\n\n<title>Audio Recording | RecordRTC</title>\n\
-      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\"\
-      >\n\n<br>\n\n<button id=\"btn-start-recording\">Start Recording</button>\n<button\
-      \ id=\"btn-stop-recording\" disabled>Stop Recording</button>\n<button id=\"\
-      btn-release-microphone\" disabled>Release Microphone</button>\n<button id=\"\
-      btn-download-recording\" disabled>Download</button>\n\n<hr>\n<div><audio controls\
-      \ autoplay playsinline></audio></div>\n\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js\"\
-      ></script>\n<script>\nvar audio = document.querySelector('audio');\n\n// ANVIL\
-      \ HOOK MODIFICATION START\nvar calling_form = null;\n  \nfunction InitLibary()\
-      \ {\n  calling_form = this; // take note of calling form (component's form)\n\
-      }\n// MODIFICATION END\n  \nfunction captureMicrophone(callback) {\n    btnReleaseMicrophone.disabled\
+    role: null, html: "<!-- <style>\n    html, body {\n        margin: 0!important;\n\
+      \        padding: 0!important;\n    }\n</style> -->\n<script>\n  var getUrl\
+      \ = window.location;\n  var baseUrl = getUrl .protocol + \"//\" + getUrl.host\
+      \ + \"/_/theme/theme.css\";\n  <link rel=\"stylesheet\" href=baseUrl>\n</script>\n\
+      <!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,\
+      \ minimum-scale=1.0\"> -->\n<center>\n<br>\n<button class=\"btn btn-default\
+      \ to-disable\" id=\"btn-start-recording\">Start Recording</button>\n<button\
+      \ class=\"btn btn-default to-disable\"id=\"btn-stop-recording\" disabled>Stop\
+      \ Recording</button>\n<button class=\"btn btn-default to-disable\" id=\"btn-release-microphone\"\
+      \ disabled>Release Microphone</button>\n<button class=\"btn btn-default to-disable\"\
+      \ id=\"btn-download-recording\" disabled>Download</button>\n\n<hr>\n<div><audio\
+      \ controls autoplay playsinline></audio></div>\n</center>\n\n<script src=\"\
+      https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js\"></script>\n\
+      <script>\nvar audio = document.querySelector('audio');\n\n// // ANVIL HOOK MODIFICATION\
+      \ START\n// var calling_form = null;\n  \n// function InitLibary() {\n//   calling_form\
+      \ = this; // take note of calling form (component's form)\n// }\n// // MODIFICATION\
+      \ END\n  \nfunction captureMicrophone(callback) {\n    btnReleaseMicrophone.disabled\
       \ = false;\n\n    if(microphone) {\n        callback(microphone);\n        return;\n\
       \    }\n\n    if(typeof navigator.mediaDevices === 'undefined' || !navigator.mediaDevices.getUserMedia)\
       \ {\n        alert('This browser does not supports WebRTC getUserMedia API.');\n\
@@ -26,15 +31,15 @@ container:
       \ = true;\n    newAudio.autoplay = true;\n\n    if(src) {\n        newAudio.src\
       \ = src;\n    }\n    \n    var parentNode = audio.parentNode;\n    parentNode.innerHTML\
       \ = '';\n    parentNode.appendChild(newAudio);\n\n    audio = newAudio;\n}\n\
-      \n// NOTIFY ANVIL MODIFICATION START  \nfunction notifyAnvil(reader, mediatype)\
-      \ {\n  \tdebugger;\n    let base64String = \"\";\n    base64String = reader.result;\n\
-      \    let tsstrng = reader.result;\n    console.log('Base64 String - ', base64String);\
-      \ \n    base64_audio_string = base64String.substr(base64String.indexOf(',')\
-      \ + 1);  \n  \tanvil.call(calling_form, 'onStop', base64_audio_string, mediatype);\n\
-      }\n// MODIFICATION END\n  \nfunction stopRecordingCallback() {\n    replaceAudio(URL.createObjectURL(recorder.getBlob()));\n\
-      \n// CONVERT BASE64 MODIFICATION START\n  \tdebugger;\n  \taudio_blob=recorder.getBlob();\
-      \  \n    var reader = new FileReader(); \n    reader.readAsDataURL(audio_blob);\
-      \ \n    reader.onloadend = notifyAnvil(reader, audio_blob.type)\n// MODIFICATION\
+      \n// // NOTIFY ANVIL MODIFICATION START  \n// function notifyAnvil(reader, mediatype)\
+      \ {\n//   \tdebugger;\n//     let base64String = \"\";\n//     base64String\
+      \ = reader.result;\n//     let tsstrng = reader.result;\n//     console.log('Base64\
+      \ String - ', base64String); \n//     base64_audio_string = base64String.substr(base64String.indexOf(',')\
+      \ + 1);  \n//   \tanvil.call(calling_form, 'onStop', base64_audio_string, mediatype);\n\
+      // }\n// // MODIFICATION END\n  \nfunction stopRecordingCallback() {\n    replaceAudio(URL.createObjectURL(recorder.getBlob()));\n\
+      \n// // CONVERT BASE64 MODIFICATION START\n//   \tdebugger;\n//   \taudio_blob=recorder.getBlob();\
+      \  \n//     var reader = new FileReader(); \n//     reader.readAsDataURL(audio_blob);\
+      \ \n//     reader.onloadend = notifyAnvil(reader, audio_blob.type)\n// // MODIFICATION\
       \ END\n\n    btnStartRecording.disabled = false;\n\n    setTimeout(function()\
       \ {\n        if(!audio.paused) return;\n\n        setTimeout(function() {\n\
       \            if(!audio.paused) return;\n            audio.play();\n        },\
