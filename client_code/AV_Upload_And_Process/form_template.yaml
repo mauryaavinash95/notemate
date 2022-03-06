@@ -66,9 +66,5 @@ components:
   name: file_loader_2
   layout_properties: {grid_position: 'BIEFPX,BENKBC'}
   event_bindings: {change: file_loader_2_change}
-- type: RepeatingPanel
-  properties: {item_template: AV_Upload_And_Process.ItemTemplate1}
-  name: repeating_panel_1
-  layout_properties: {grid_position: 'SJLHRB,NIOQTY'}
 is_package: true
 custom_component: false
