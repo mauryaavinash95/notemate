@@ -14,26 +14,26 @@ components:
       spacing_below: small, background: '', horizontal_align: center}
     name: image_1
     layout_properties: {x: -87.30000305175781, y: 10, width: 836}
-  - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Login, font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: ''}
-    name: button_1
-    layout_properties: {x: 349.70001220703125, y: 245.0833282470703, width: 100}
-    event_bindings: {click: button_1_click}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
       visible: true, text: PACIFICIUS, font_size: 30, font: canao, spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
       underline: false, icon: ''}
     name: label_1
-    layout_properties: {x: 315.70001220703125, y: 88.08332824707031, width: 160}
+    layout_properties: {x: 237.70001220703125, y: 88.08332824707031, width: 160}
   - type: RichText
     properties: {role: null, align: center, tooltip: '', enable_slots: true, border: '',
       foreground: '', visible: true, font_size: 16, content: We help you work smarter,
       font: '', spacing_above: small, spacing_below: small, data: null, background: '',
       format: markdown}
     name: rich_text_1
-    layout_properties: {x: 295, y: 173.0833282470703, width: 244}
+    layout_properties: {x: 205.70001220703125, y: 165.0833282470703, width: 244}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Login, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: button_1
+    layout_properties: {x: 269.70001220703125, y: 245.0833282470703, width: 100}
+    event_bindings: {click: button_1_click}
 is_package: true
