@@ -32,12 +32,8 @@ components:
   event_bindings: {change: file_loader_1_change}
 - type: Spacer
   properties: {height: 32}
-  name: spacer_2
-  layout_properties: {grid_position: 'URFMCD,XRIGCJ'}
-- type: form:Record_Audio
-  properties: {}
-  name: record_audio_1
-  layout_properties: {grid_position: 'TCXWAX,EZNITE'}
+  name: spacer_1
+  layout_properties: {grid_position: 'IGESMM,RFNIPO'}
 - type: FileLoader
   properties:
     role: null
