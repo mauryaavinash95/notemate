@@ -16,10 +16,14 @@ class Main(MainTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
    
-  def f
+  def form_show(self, **event_args):
     self.content_panel.clear()
     self.content_panel.add_component(Landing(), full_width_row=True)
-    
+    if anvil.users.get_user() is None:
+      self.button_1.visible = False;
+      self.button_1.visible = False;
+      self.button_1.visible = False;
+    else
     
   def button_2_click(self, **event_args):
     self.content_panel.clear()
