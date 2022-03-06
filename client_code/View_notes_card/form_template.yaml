@@ -40,4 +40,4 @@ components:
     name: button_2
     layout_properties: {grid_position: 'XULTUB,GBDZMO PUKBYM,DXHOGK'}
 is_package: true
-custom_component: true
+custom_component: false
