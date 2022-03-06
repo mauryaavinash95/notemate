@@ -11,7 +11,7 @@ startup_form: null
 db_schema:
   notes:
     title: Notes
-    client: none
+    client: full
     server: full
     columns:
     - name: Name
@@ -46,7 +46,7 @@ db_schema:
       type: media
   test:
     title: Test
-    client: none
+    client: full
     server: full
     columns:
     - name: Name
