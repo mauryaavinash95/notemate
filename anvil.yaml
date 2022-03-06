@@ -2,7 +2,7 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: AV_Upload_And_Process}
+startup: {type: form, module: View_all_notes_card}
 package_name: Test_Brickhack_v1
 allow_embedding: false
 name: Test-Brickhack-v1
@@ -38,15 +38,10 @@ db_schema:
     - name: Link2
       admin_ui: {width: 200}
       type: string
-    - name: Llink2
+    - name: Link3
       admin_ui: {width: 200}
       type: string
-  images:
-    title: Images
-    client: none
-    server: full
-    columns:
-    - name: Image
+    - name: Image1
       admin_ui: {width: 200}
       type: media
 renamed: true

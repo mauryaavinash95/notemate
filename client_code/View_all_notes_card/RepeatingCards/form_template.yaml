@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
+  data_bindings: []
 components:
 - type: form:View_notes_card
   properties: {}
