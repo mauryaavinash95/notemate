@@ -2,7 +2,7 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: View_all_notes_card}
+startup: {type: form, module: temp}
 package_name: Test_Brickhack_v1
 allow_embedding: false
 name: Test-Brickhack-v1

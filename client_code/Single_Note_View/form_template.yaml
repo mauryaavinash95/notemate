@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
+  data_bindings: []
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
@@ -36,6 +37,8 @@ components:
       spacing_below: small, data: null, background: '', format: markdown}
     name: rich_text_1
     layout_properties: {grid_position: 'XULTUB,GBDZMO KMXHES,MMWAVG'}
+    data_bindings:
+    - {property: data, code: 'self.item[''Name'']'}
   - type: RichText
     properties: {role: null, align: left, tooltip: '', enable_slots: true, border: '',
       foreground: '', visible: true, font_size: null, content: Text-2, font: '', spacing_above: small,
