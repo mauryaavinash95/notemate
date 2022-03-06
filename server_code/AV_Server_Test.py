@@ -24,11 +24,3 @@ def send_audio_file(file):
   }
   return res
 
-# def upload_blob(source_file_name):
-#   bucket_name = "make3400_cloudbuild"
-#   source_file_name = local/path/to/file
-#   destination_blob_name = "gs://make3400_cloudbuild"
-#   storage_client = storage.Client()
-#   bucket = storage_client.bucket(bucket_name)
-#   blob = bucket.blob(destination_blob_name)
-#   blob.upload_from_filename(source_file_name)
