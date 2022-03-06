@@ -1,0 +1,110 @@
+container:
+  type: HtmlTemplate
+  properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
+    role: null, html: "<style>\n    html, body {\n        margin: 0!important;\n \
+      \       padding: 0!important;\n    }\n</style>\n\n<title>Audio Recording | RecordRTC</title>\n\
+      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\"\
+      >\n\n<br>\n\n<button id=\"btn-start-recording\">Start Recording</button>\n<button\
+      \ id=\"btn-stop-recording\" disabled>Stop Recording</button>\n<button id=\"\
+      btn-release-microphone\" disabled>Release Microphone</button>\n<button id=\"\
+      btn-download-recording\" disabled>Download</button>\n\n<hr>\n<div><audio controls\
+      \ autoplay playsinline></audio></div>\n\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js\"\
+      ></script>\n<script>\nvar audio = document.querySelector('audio');\n\n// ANVIL\
+      \ HOOK MODIFICATION START\nvar calling_form = null;\n  \nfunction InitLibary()\
+      \ {\n  calling_form = this; // take note of calling form (component's form)\n\
+      }\n// MODIFICATION END\n  \nfunction captureMicrophone(callback) {\n    btnReleaseMicrophone.disabled\
+      \ = false;\n\n    if(microphone) {\n        callback(microphone);\n        return;\n\
+      \    }\n\n    if(typeof navigator.mediaDevices === 'undefined' || !navigator.mediaDevices.getUserMedia)\
+      \ {\n        alert('This browser does not supports WebRTC getUserMedia API.');\n\
+      \n        if(!!navigator.getUserMedia) {\n            alert('This browser seems\
+      \ supporting deprecated getUserMedia API.');\n        }\n    }\n\n    navigator.mediaDevices.getUserMedia({\n\
+      \        audio: isEdge ? true : {\n            echoCancellation: false\n   \
+      \     }\n    }).then(function(mic) {\n        callback(mic);\n    }).catch(function(error)\
+      \ {\n        alert('Unable to capture your microphone. Please check console\
+      \ logs.');\n        console.error(error);\n    });\n}\n\nfunction replaceAudio(src)\
+      \ {\n    var newAudio = document.createElement('audio');\n    newAudio.controls\
+      \ = true;\n    newAudio.autoplay = true;\n\n    if(src) {\n        newAudio.src\
+      \ = src;\n    }\n    \n    var parentNode = audio.parentNode;\n    parentNode.innerHTML\
+      \ = '';\n    parentNode.appendChild(newAudio);\n\n    audio = newAudio;\n}\n\
+      \n// NOTIFY ANVIL MODIFICATION START  \nfunction notifyAnvil(reader, mediatype)\
+      \ {\n  \tdebugger;\n    let base64String = \"\";\n    base64String = reader.result;\n\
+      \    let tsstrng = reader.result;\n    console.log('Base64 String - ', base64String);\
+      \ \n    base64_audio_string = base64String.substr(base64String.indexOf(',')\
+      \ + 1);  \n  \tanvil.call(calling_form, 'onStop', base64_audio_string, mediatype);\n\
+      }\n// MODIFICATION END\n  \nfunction stopRecordingCallback() {\n    replaceAudio(URL.createObjectURL(recorder.getBlob()));\n\
+      \n// CONVERT BASE64 MODIFICATION START\n  \tdebugger;\n  \taudio_blob=recorder.getBlob();\
+      \  \n    var reader = new FileReader(); \n    reader.readAsDataURL(audio_blob);\
+      \ \n    reader.onloadend = notifyAnvil(reader, audio_blob.type)\n// MODIFICATION\
+      \ END\n\n    btnStartRecording.disabled = false;\n\n    setTimeout(function()\
+      \ {\n        if(!audio.paused) return;\n\n        setTimeout(function() {\n\
+      \            if(!audio.paused) return;\n            audio.play();\n        },\
+      \ 1000);\n        \n        audio.play();\n    }, 300);\n\n    audio.play();\n\
+      \n    btnDownloadRecording.disabled = false;\n\n    if(isSafari) {\n       \
+      \ click(btnReleaseMicrophone);\n    }\n}\n\nvar isEdge = navigator.userAgent.indexOf('Edge')\
+      \ !== -1 && (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob);\nvar isSafari\
+      \ = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);\n\nvar recorder;\
+      \ // globally accessible\nvar microphone;\n\nvar btnStartRecording = document.getElementById('btn-start-recording');\n\
+      var btnStopRecording = document.getElementById('btn-stop-recording');\nvar btnReleaseMicrophone\
+      \ = document.querySelector('#btn-release-microphone');\nvar btnDownloadRecording\
+      \ = document.getElementById('btn-download-recording');\n\nbtnStartRecording.onclick\
+      \ = function() {\n    this.disabled = true;\n    this.style.border = '';\n \
+      \   this.style.fontSize = '';\n\n    if (!microphone) {\n        captureMicrophone(function(mic)\
+      \ {\n            microphone = mic;\n\n            if(isSafari) {\n         \
+      \       replaceAudio();\n\n                audio.muted = true;\n           \
+      \     audio.srcObject = microphone;\n\n                btnStartRecording.disabled\
+      \ = false;\n                btnStartRecording.style.border = '1px solid red';\n\
+      \                btnStartRecording.style.fontSize = '150%';\n\n            \
+      \    alert('Please click startRecording button again. First time we tried to\
+      \ access your microphone. Now we will record it.');\n                return;\n\
+      \            }\n\n            click(btnStartRecording);\n        });\n     \
+      \   return;\n    }\n\n    replaceAudio();\n\n    audio.muted = true;\n    audio.srcObject\
+      \ = microphone;\n\n    var options = {\n        type: 'audio',\n        numberOfAudioChannels:\
+      \ isEdge ? 1 : 2,\n        checkForInactiveTracks: true,\n        bufferSize:\
+      \ 16384\n    };\n\n    if(isSafari || isEdge) {\n        options.recorderType\
+      \ = StereoAudioRecorder;\n    }\n\n    if(navigator.platform && navigator.platform.toString().toLowerCase().indexOf('win')\
+      \ === -1) {\n        options.sampleRate = 48000; // or 44100 or remove this\
+      \ line for default\n    }\n\n    if(isSafari) {\n        options.sampleRate\
+      \ = 44100;\n        options.bufferSize = 4096;\n        options.numberOfAudioChannels\
+      \ = 2;\n    }\n\n    if(recorder) {\n        recorder.destroy();\n        recorder\
+      \ = null;\n    }\n\n    recorder = RecordRTC(microphone, options);\n\n    recorder.startRecording();\n\
+      \n    btnStopRecording.disabled = false;\n    btnDownloadRecording.disabled\
+      \ = true;\n};\n\nbtnStopRecording.onclick = function() {\n    this.disabled\
+      \ = true;\n    recorder.stopRecording(stopRecordingCallback);\n};\n\nbtnReleaseMicrophone.onclick\
+      \ = function() {\n    this.disabled = true;\n    btnStartRecording.disabled\
+      \ = false;\n\n    if(microphone) {\n        microphone.stop();\n        microphone\
+      \ = null;\n    }\n\n    if(recorder) {\n        // click(btnStopRecording);\n\
+      \    }\n};\n\nbtnDownloadRecording.onclick = function() {\n    this.disabled\
+      \ = true;\n    if(!recorder || !recorder.getBlob()) return;\n\n    if(isSafari)\
+      \ {\n        recorder.getDataURL(function(dataURL) {\n            SaveToDisk(dataURL,\
+      \ getFileName('mp3'));\n        });\n        return;\n    }\n\n    var blob\
+      \ = recorder.getBlob();\n    var file = new File([blob], getFileName('mp3'),\
+      \ {\n        type: 'audio/mp3'\n    });\n    invokeSaveAsDialog(file);\n};\n\
+      \nfunction click(el) {\n    el.disabled = false; // make sure that element is\
+      \ not disabled\n    var evt = document.createEvent('Event');\n    evt.initEvent('click',\
+      \ true, true);\n    el.dispatchEvent(evt);\n}\n\nfunction getRandomString()\
+      \ {\n    if (window.crypto && window.crypto.getRandomValues && navigator.userAgent.indexOf('Safari')\
+      \ === -1) {\n        var a = window.crypto.getRandomValues(new Uint32Array(3)),\n\
+      \            token = '';\n        for (var i = 0, l = a.length; i < l; i++)\
+      \ {\n            token += a[i].toString(36);\n        }\n        return token;\n\
+      \    } else {\n        return (Math.random() * new Date().getTime()).toString(36).replace(/\\\
+      ./g, '');\n    }\n}\n\nfunction getFileName(fileExtension) {\n    var d = new\
+      \ Date();\n    var year = d.getFullYear();\n    var month = d.getMonth();\n\
+      \    var date = d.getDate();\n    return 'RecordRTC-' + year + month + date\
+      \ + '-' + getRandomString() + '.' + fileExtension;\n}\n\nfunction SaveToDisk(fileURL,\
+      \ fileName) {\n    // for non-IE\n    if (!window.ActiveXObject) {\n       \
+      \ var save = document.createElement('a');\n        save.href = fileURL;\n  \
+      \      save.download = fileName || 'unknown';\n        save.style = 'display:none;opacity:0;color:transparent;';\n\
+      \        (document.body || document.documentElement).appendChild(save);\n\n\
+      \        if (typeof save.click === 'function') {\n            save.click();\n\
+      \        } else {\n            save.target = '_blank';\n            var event\
+      \ = document.createEvent('Event');\n            event.initEvent('click', true,\
+      \ true);\n            save.dispatchEvent(event);\n        }\n\n        (window.URL\
+      \ || window.webkitURL).revokeObjectURL(save.href);\n    }\n\n    // for IE\n\
+      \    else if (!!window.ActiveXObject && document.execCommand) {\n        var\
+      \ _window = window.open(fileURL, '_blank');\n        _window.document.close();\n\
+      \        _window.document.execCommand('SaveAs', true, fileName || fileURL)\n\
+      \        _window.close();\n    }\n}\n</script>\n\n<footer style=\"margin-top:\
+      \ 20px;\"><small id=\"send-message\"></small></footer>\n"}
+components: []
+is_package: true
+custom_component: true
